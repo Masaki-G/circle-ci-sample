@@ -3,12 +3,15 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+    resource_class: medium # ここで指定
+
     working_directory: ~/repo
     steps:
       - checkout
       - run: npm install   # npmパッケージインストール
       - run: npm run build  # ソースビルド実行
       - run: "echo Hello, World!"
+      - run: ls -la
       - persist_to_workspace:
           root: .
           paths: [ '*' ]
