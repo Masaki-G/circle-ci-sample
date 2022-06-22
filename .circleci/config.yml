@@ -8,7 +8,6 @@ jobs:
       - checkout
       - run: npm install   # npmパッケージインストール
       - run: npm run build  # ソースビルド実行
-          - command: "echo Hello, World!"
       - persist_to_workspace:
           root: .
           paths: [ '*' ]
