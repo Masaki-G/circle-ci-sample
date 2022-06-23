@@ -12,6 +12,7 @@ jobs:
       - run: npm run build  # ソースビルド実行
       - run: "echo Hello, World!"
       - run: ls -la
+      - run: pwd
       - persist_to_workspace:
           root: .
           paths: [ '*' ]
