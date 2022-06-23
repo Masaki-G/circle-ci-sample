@@ -15,8 +15,10 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: [ '*' ]
-  # deploy:
-  #   working_directory: ~/repo
+  deploy:
+    working_directory: ~/repo
+    steps:
+      - run: ls -la
   #   environment:
   #     - AWS_S3_BUCKET_NAME: 【自分のS3バケット名】
   #   docker:
@@ -31,7 +33,7 @@ workflows:
   build-deploy:
     jobs:
       - build
-      # - deploy:
+      - deploy
       #     requires:
       #       - build
       #     filters:
