@@ -16,6 +16,7 @@ jobs:
           root: .
           paths: [ '*' ]
   deploy:
+    working_directory: ~/repo
     steps:
       - run: ls -la
       - run: pwd
