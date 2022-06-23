@@ -19,6 +19,8 @@ jobs:
   deploy:
     working_directory: ~/repo
     steps:
+      - attach_workspace:
+          at: .
       - run: ls -la
       - run: pwd
 
