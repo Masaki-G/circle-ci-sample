@@ -21,8 +21,8 @@ jobs:
       - run: ls -la
   #   environment:
   #     - AWS_S3_BUCKET_NAME: 【自分のS3バケット名】
-  #   docker:
-  #     - image: innovatorjapan/awscli:latest
+    docker:
+      - image: innovatorjapan/awscli:latest
   #   steps:
   #     - attach_workspace:
   #         at: .
