@@ -18,6 +18,8 @@ jobs:
   deploy:
     steps:
       - run: ls -la
+      - run: pwd
+
   #   environment:
   #     - AWS_S3_BUCKET_NAME: 【自分のS3バケット名】
     docker:
