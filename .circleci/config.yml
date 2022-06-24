@@ -29,8 +29,8 @@ jobs:
           from: public
           to: s3://circle-ci-test-20220624
           overwrite: true
-#     docker:
-#       - image: innovatorjapan/awscli:latest
+    docker:
+      - image: circleci/node:latest
       
 workflows:
   version: 2
