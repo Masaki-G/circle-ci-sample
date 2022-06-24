@@ -34,7 +34,7 @@ jobs:
       
 workflows:
   version: 2
-  build-deploy:
+  s3-deploy:
     jobs:
       - build
       - deploy:
@@ -45,3 +45,5 @@ workflows:
       #     filters:
       #       branches:
       #         only: master
+      
+      
