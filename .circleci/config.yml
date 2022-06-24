@@ -30,8 +30,7 @@ jobs:
           at: .
       - aws-s3/sync: 
           from: ./public
-          overwrite: true
-          to: 's3://circle-ci-test-20220624'
+          to: $BUCKET_URL
       
 workflows:
   version: 2
