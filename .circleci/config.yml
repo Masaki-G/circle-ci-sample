@@ -1,4 +1,6 @@
 version: 2
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
   build:
     docker:
@@ -23,9 +25,12 @@ jobs:
           at: .
       - run: ls -la
       - run: pwd
-      - run: aws s3 sync ./public/ s3://circle-ci-test-20220624 --exact-timestamps --delete
-    docker:
-      - image: innovatorjapan/awscli:latest
+      - aws-s3/sync:
+          from: public
+          to: s3://circle-ci-test-20220624
+          overwrite: true
+#     docker:
+#       - image: innovatorjapan/awscli:latest
       
 workflows:
   version: 2
