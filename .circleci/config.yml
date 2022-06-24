@@ -18,23 +18,16 @@ jobs:
       - persist_to_workspace:
           root: .
           paths: [ '*' ]
+
   deploy:
     working_directory: ~/repo
     docker:
-      - image: 'cimg/python:3.6'
+      - image: circleci/node:14
     steps:
-      - checkout
-      - attach_workspace:
+      - attach_workspace: 
           at: .
-      - run: ls -la
-      - run: pwd
-      - aws-s3/sync:
-          arguments: |
-            --acl public-read \
-            --acl bucket-owner-full-control \
-            --cache-control "max-age=86400" \
-            --delete
-          from: public
+      - aws-s3/sync: 
+          from: ./public
           overwrite: true
           to: 's3://circle-ci-test-20220624'
       
