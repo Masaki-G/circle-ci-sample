@@ -23,10 +23,7 @@ jobs:
           at: .
       - run: ls -la
       - run: pwd
-      - run: aws s3 sync ./public/ s3://circle-ci-test-20220624 --exact-timestamps --request-payer requester
-
-  #   environment:
-  #     - AWS_S3_BUCKET_NAME: 【自分のS3バケット名】
+      - run: aws s3 sync ./public/ s3://circle-ci-test-20220624 --exact-timestamps --delete
     docker:
       - image: innovatorjapan/awscli:latest
       
