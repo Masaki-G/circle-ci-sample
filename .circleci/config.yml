@@ -26,9 +26,15 @@ jobs:
       - run: ls -la
       - run: pwd
       - aws-s3/sync:
+          arguments: |
+            --acl public-read \
+            --acl bucket-owner-full-control \
+            --cache-control "max-age=86400" \
+            --delete
           from: public
-          to: s3://circle-ci-test-20220624
           overwrite: true
+          to: 's3://circle-ci-test-20220624'
+          
     docker:
       - image: circleci/node:latest
       
