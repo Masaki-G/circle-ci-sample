@@ -19,16 +19,14 @@ jobs:
   deploy:
     working_directory: ~/repo
 
-
+    docker:
+      - image: innovatorjapan/awscli:latest
   steps:
       - attach_workspace:
           at: .
       - run: ls -la
       - run: pwd
-    docker:
-      - image: innovatorjapan/awscli:latest
-
-  - run: aws s3 sync ./public/ s3://circle-ci-test-20220624 --exact-timestamps
+      - run: aws s3 sync ./public/ s3://circle-ci-test-20220624 --exact-timestamps
 
 workflows:
   version: 2
