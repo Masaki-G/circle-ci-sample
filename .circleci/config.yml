@@ -20,6 +20,8 @@ jobs:
           paths: [ '*' ]
   deploy:
     working_directory: ~/repo
+    docker:
+      - image: 'cimg/python:3.6'
     steps:
       - attach_workspace:
           at: .
@@ -34,9 +36,6 @@ jobs:
           from: public
           overwrite: true
           to: 's3://circle-ci-test-20220624'
-          
-    docker:
-      - image: circleci/node:latest
       
 workflows:
   version: 2
