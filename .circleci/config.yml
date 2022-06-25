@@ -32,6 +32,7 @@ jobs:
       - aws-s3/sync: 
           from: ./build
           to: $BUCKET_URL
+      - run: aws cloudfront create-invalidation --distribution-id E3HBIB96L90TKE --path "/*"
       
 workflows:
   version: 2
