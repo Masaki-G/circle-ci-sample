@@ -21,7 +21,20 @@ jobs:
           root: .
           paths: [ '*' ]
 
-  deploy:
+  deploy_prod:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:14
+    resource_class: medium # ここでスペック指定
+    steps:
+      - attach_workspace: 
+          at: .
+      - aws-s3/sync: 
+          from: ./build
+          to: $BUCKET_URL
+      - run: aws cloudfront create-invalidation --distribution-id E3HBIB96L90TKE --path "/*"
+      
+  deploy_dev:
     working_directory: ~/repo
     docker:
       - image: circleci/node:14
@@ -39,11 +52,18 @@ workflows:
   s3-deploy:
     jobs:
       - build
-      - deploy:
+      - deploy_prod:
           requires:
             - build
           filters:
             branches:
               only: master
+      - build
+      - deploy_dev:
+          requires:
+            - build
+          filters:
+            branches:
+              only: develop
       
       
