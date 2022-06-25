@@ -30,7 +30,7 @@ jobs:
       - attach_workspace: 
           at: .
       - aws-s3/sync: 
-          from: ./public
+          from: ./build
           to: $BUCKET_URL
       
 workflows:
