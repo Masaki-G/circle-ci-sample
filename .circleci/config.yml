@@ -14,9 +14,6 @@ jobs:
       - checkout
       - run: npm install   # npmパッケージインストール
       - run: npm run build  # ソースビルド実行
-      - run: "echo Hello, World!"
-      - run: ls -la
-      - run: pwd
       - persist_to_workspace:
           root: .
           paths: [ '*' ]
@@ -38,7 +35,7 @@ jobs:
     working_directory: ~/repo
     docker:
       - image: circleci/node:14
-    resource_class: medium # ここでスペック指定
+    resource_class: medium
     steps:
       - attach_workspace: 
           at: .
