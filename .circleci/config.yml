@@ -1,36 +1,26 @@
-version: 2
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build:
+  say-hello:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
-      - image: circleci/node:latest
-    working_directory: ~/repo
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run: npm install   # npmパッケージインストール
-      - run: npm run build  # ソースビルド実行
-          - command: "echo Hello, World!"
-      - persist_to_workspace:
-          root: .
-          paths: [ '*' ]
-  # deploy:
-  #   working_directory: ~/repo
-  #   environment:
-  #     - AWS_S3_BUCKET_NAME: 【自分のS3バケット名】
-  #   docker:
-  #     - image: innovatorjapan/awscli:latest
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run: aws s3 sync . s3://${AWS_S3_BUCKET_NAME}/ --exact-timestamps --delete --exclude=".git/*" --exclude=".circleci/*" --exclude="node_modules/*"  # ここのexcludeオプションは自分の環境に合わせる
+      - run:
+          name: "Say hello"
+          command: "echo Hello, World!"
 
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  version: 2
-  build-deploy:
+  say-hello-workflow:
     jobs:
-      - build
-      # - deploy:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only: master
+      - say-hello
